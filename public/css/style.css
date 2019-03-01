@@ -1,0 +1,292 @@
+			body {
+				background: #FAEBD7;
+				font-family: 'Neucha', cursive;
+				/*
+				font-family: 'M PLUS Rounded 1c', sans-serif;
+				font-family: 'Comfortaa', cursive;
+				font-family: 'Vollkorn', serif;
+				font-family: 'Caveat', cursive;
+				font-family: 'Poiret One', cursive;
+				font-family: 'Neucha', cursive;
+				*/
+			}
+			header h1 {
+				color: #B0C4DE;
+				margin-top: 20px;
+				font-size: 112px;
+				margin-left: 50px;
+			}
+			header b {
+			    position: absolute;
+			    color: #B0C4DE;
+			    top: 122px;
+			    margin-left: 150px;
+			    font-size: 42px;
+			}
+			.header_img {
+
+				/*clip-path: polygon(0 40%, 100% 40%, 100% 70%, 84% 61%, 45% 68%, 25% 64%, 0% 66%, 0 55%);*/
+				clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
+				margin-top: -40%;
+				z-index: -9999;
+				width: 100%;
+			}
+			main {
+				margin-top: 0%;
+				display: flex;
+				flex-direction: column;
+			}
+			.hidden_admin {
+				display: none;
+			}
+			.admin_button {
+				position: absolute;
+				top: 2%;
+				left: 98%;
+				font-size: 18px;
+				padding: 4px;
+				width: 4%;
+				border-radius: 4px;
+				background: #B0C4DE;
+			}
+			#app {
+				margin-top: -30%;
+			}
+			tr:hover {
+				background: #ADD8E6;
+				/*clip-path: polygon(100% 0, 99% 22%, 100% 34%, 100% 47%, 98% 80%, 100% 100%, 0 100%, 0 0);*/
+			}
+			table {
+				width: 100%;
+			}
+			td {
+				padding-right: 15px;
+				padding: 8px;
+				height: 80px;
+				width: 250px;
+				border-bottom: 1px dashed grey;
+				font-size: 24px;
+			}
+			td img {
+				height: 150px;
+				width: 150px;
+				border: 4px solid white;
+			}
+			.description {
+				position: fixed;
+				background: #FFEBCD;
+				min-height: 400px;
+				width: 60%;
+				border: 1px dashed black;
+				left: 20%;
+				top: 20%;
+				padding: 20px;
+				z-index: 1;
+			}
+			#id0 {
+				font-weight: bold;
+				font-size: 22px;
+				border-bottom: 1px solid black;
+				background: #B0C4DE;
+				opacity: 0.9;
+			}
+			#id0 img {
+				border: none;
+			}
+			#desc_id0 {
+				display: none;
+			}
+			.buttons {
+				position: absolute;
+				display: flex;
+				font-size: 24px;
+				left: 52%;
+				top: 375px;
+			}
+			.buttons b {
+				font-size: 12px;
+				position: absolute;
+				background: white;
+				border: 2px dashed black;
+				border-radius: 8px;
+				padding: 10px;
+				top: -398px;
+				left: 360px;
+				color: #fff;
+    			background-color: #dc3545;
+    			border-color: #dc3545;
+    			width: 40px;
+    			height: 40px;
+    			text-align: center;
+    			transition: 0.2s;
+			}
+			.buttons b:hover {
+				background: #F08080;
+			}
+			.buttons p {
+				font-size: 20px;
+			    margin-top: -30px;
+			    margin-right: 0px;
+
+			}
+			.buttons div {
+				display: flex;
+				margin-left: -370px;
+			}
+			input[type="number"] {
+				border: none;
+				border-bottom: 2px solid;
+    			border-radius: 8px; 
+    			text-align: center;
+    			width: 60px;
+    			background: #FFE4C4;
+			}
+			.buttons button {
+				position: absolute;	
+				width: 180px;
+				font-size: 20px;
+			}
+			.btn-info {
+				left: 220px;
+			}
+			.ym_pay_button {
+				display: flex;
+				justify-content: space-between;
+				border: 1px solid black;
+				border-radius: 4px;
+				position: relative;
+				top: 10px;
+				left: 30%;
+				width: 900px;
+				font-size: 36px;
+			} 
+			.ym_pay_button button {
+				font-size: 36px;
+			}
+			.ym_pay_button label:hover {
+				background: #17a2b8;
+				border-radius: 4px;
+			}
+			.go_home_button {
+				position: relative;
+				font-size: 36px;
+				top:15px;
+				left: 30%;
+				height: 72px;
+				width: 900px;
+			}
+			.hidden_go_home {
+				display: none;
+			}
+			.go_home_static_class {
+
+			}
+			.go_home_static_class input {
+				margin-left: 25px;
+				width: 450px;
+				height: 55px;
+				font-size: 24px;
+				text-align: center;
+			}
+			.go_home_static_class textarea {
+				margin-left: 25px;
+				width: 450px;
+				height: 155px;
+				font-size: 24px;
+			}
+			.task {
+				position: absolute;
+			    margin-left: 48%;
+			    margin-top: -51%;
+			    padding: 8px;
+			}
+
+			@media (max-width: 1500px){
+				.header_img {
+				    margin-top: -42%;
+				}
+				.description {
+					left: 20%;
+					top: 20%;
+				}
+			}
+			@media (max-width: 1264px){
+				.header_img {
+				    margin-top: -45%;
+				}
+				.description {
+					left: 0%;
+					top: 20%;
+					width: 100%;
+				}
+				header h1 {
+					font-size: 62px;
+					margin-top: 0px;
+				}
+				header b {
+					font-size: 44px;
+					margin-top: -114px;
+					margin-left: 60%
+				}
+			}
+			@media (max-width: 1024px){
+				.header_img {
+				    margin-top: -46%;
+				}
+				header h1 {
+					font-size: 62px;
+					margin-top: 0px;
+				}
+				header b {
+					font-size: 44px;
+					margin-top: -114px;
+					margin-left: 60%
+				}
+				.ym_pay_button {
+					font-size: 26px;
+					left: 0%;
+					width: 100%;
+				}
+				.ym_pay_button button {
+					font-size: 26px;
+				}
+				.go_home_button {
+					position: relative;
+					font-size: 26px;
+					top:15px;
+					left: 0%;
+					height: 72px;
+					width: 100%;
+				}
+			}
+			@media (max-width: 786px){
+				.description {
+					position: absolute;
+					width: 100%;
+				}
+				.header_img {
+				    margin-top: -46%;
+
+				}
+				header h1 {
+					font-size: 42px;
+				}
+				header b {
+					font-size: 28px;
+				}
+				.buttons b {
+					left: 250px;
+				}
+				.buttons div {
+					margin-left: -250px;
+				}			
+
+			}
+			@media (max-width: 386px){
+				.buttons b {
+					left: 150px;
+				}
+				.buttons div {
+					margin-left: -150px;
+				}
+			}

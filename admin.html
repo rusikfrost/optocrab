@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Caveat|Comfortaa|M+PLUS+Rounded+1c|Neucha|Poiret+One|Vollkorn" rel="stylesheet">
+	<style>
+		img {
+			height: 100px;
+			width: 100px;
+		}
+		td {
+			font-size: 22px;
+			padding: 8px;
+			border-bottom: 2px solid black;
+			border-left: 1px dashed gray;
+		}
+		label{
+			margin-left: 
+			font-size: 18px;
+		}
+		.inputs {
+			margin-left: 5%;
+		}
+		input {
+			font-size: 18px;
+			height: 42px;
+			width: 325px;
+		}
+		#id0 button {
+			display: none;
+			content: "Удалить";
+		}
+	</style>
+</head>
+<body>
+<main>
+<h1>Админка</h1>
+
+	  <template v-for="row in rows">
+      <tr :id="'id'+row.id">
+        <td><img :src="row.photo"></td>
+        <td><b>id: {{ row.id }}</b></td>
+        <td><b>{{ row.name }}</b></td>
+        <td>{{ row.kg_in_pack }} кг</td>
+        <td>{{ row.count }} шт.</td>
+        <td>{{ row.price }} руб.</td>
+        <td>{{ row.sum_price }} руб.</td>
+        <td>{{ row.kg }} кг</td>
+        <td><button @click="delete_product(row)">X</button></td>
+      </tr>
+    </template><br>
+<div class="inputs">
+		<label> id продукта <br>
+			<input type="number" v-model="change.id" placeholder="id продукта"></label>
+		<label> Ссылка на фото продукта<br>
+			<input type="text" v-model="change.photo" placeholder="Ссылка на фото продукта"></label>
+		<label>Название продукта<br>
+			<input type="text" v-model="change.name" placeholder="Название продукта"></label>
+		<label>Килограмм в упаковке<br>
+			<input type="number" v-model="change.kg_in_pack" placeholder="Килограмм в упаковке"></label>
+		<label>Цена килограмма<br>
+			<input type="number" v-model="change.price" placeholder="Цена килограмма"></label>
+		<label><button @click="change_product">change</button></label>
+</div>
+
+</main>
+<script>
+
+var admin_vue = new Vue ({
+	el: 'main',
+	data: {
+		rows: [],
+		delete_button: '',
+		change: { id: 0, photo: '', name: '', kg_in_pack: 0, price: 0, count: 0, sum_price: 0, kg: 0 }
+	},
+	methods: {
+		delete_product: function(x) {
+			axios.post('/delete_product', x)
+	        .then(function (response) {
+	 	 	})
+	  	console.log(x)
+		},
+		change_product: function() {
+			axios.post('/change_product', this.change)
+	        .then(function (response) {
+	 	 })
+		}
+	},
+	mounted() {
+	    axios.post('/products')
+	        .then(function (response) {
+	    console.log(response.data);
+	    admin_vue.rows = response.data;
+	  })
+  }
+})
+
+
+</script>
+
+
+</body>
+</html>
