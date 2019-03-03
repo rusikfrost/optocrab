@@ -4,12 +4,14 @@ const	bodyParser = require('body-parser');
 const	axios = require('axios');
 const 	needle = require('needle');
 const 	path = require('path');
+const	favicon = require('serve-favicon');
 const	MongoClient = require('mongodb').MongoClient;
 const	url = "mongodb://localhost:27017/";
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static('public'))
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use('/public', express.static(path.join(__dirname, 'public')))
  
 app.get('/', function (req, res) {
@@ -19,7 +21,7 @@ app.get('/', function (req, res) {
 app.post('/products', function (req, res) {
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("mydb");
-	 	dbo.collection('test_products').find({}).toArray(function(err, result)  {
+	 	dbo.collection('test_products').find({}).sort( { id: 1 } ).toArray(function(err, result)  {
 	 		res.send(result)
 	   		db.close();
 	    });

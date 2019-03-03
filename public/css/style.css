@@ -11,14 +11,14 @@
 				*/
 			}
 			header h1 {
-				color: #B0C4DE;
+				color: #17a2b8;
 				margin-top: 20px;
 				font-size: 112px;
 				margin-left: 50px;
 			}
 			header b {
 			    position: absolute;
-			    color: #B0C4DE;
+			    color: #FAEBD7;
 			    top: 122px;
 			    margin-left: 150px;
 			    font-size: 42px;
@@ -41,19 +41,28 @@
 			}
 			.admin_button {
 				position: absolute;
-				top: 2%;
-				left: 98%;
-				font-size: 18px;
-				padding: 4px;
-				width: 4%;
-				border-radius: 4px;
+				top: 0%;
+				right: 250px;
+				width: 25%;
+				height: 5%;
+				/*font-size: 24px;
+				padding: 12px;
+				width: 8%;
+				border-radius: 28px;
 				background: #B0C4DE;
+				cursor: pointer; */
 			}
+			/*.admin_button:hover {
+				left: 95%;
+				transition: 0.3s;
+			}*/
 			#app {
 				margin-top: -30%;
 			}
 			tr:hover {
 				background: #ADD8E6;
+				transition: 0.1s;
+
 				/*clip-path: polygon(100% 0, 99% 22%, 100% 34%, 100% 47%, 98% 80%, 100% 100%, 0 100%, 0 0);*/
 			}
 			table {
@@ -87,8 +96,9 @@
 				font-weight: bold;
 				font-size: 22px;
 				border-bottom: 1px solid black;
-				background: #B0C4DE;
+				background: #17a2b8;
 				opacity: 0.9;
+				color: white;
 			}
 			#id0 img {
 				border: none;
@@ -102,6 +112,24 @@
 				font-size: 24px;
 				left: 52%;
 				top: 375px;
+			}
+			.close {
+				font-size: 12px;
+			    position: absolute;
+			    background: white;
+			    border: 2px dashed black;
+			    border-radius: 8px;
+			    padding: 10px;
+			    top: -22px;
+			    left: 900px;
+			    color: #fff;
+			    background-color: #dc3545;
+			    border-color: #dc3545;
+			    width: 40px;
+			    height: 40px;
+			    text-align: center;
+			    transition: 0.2s;
+			    opacity: 1;
 			}
 			.buttons b {
 				font-size: 12px;
@@ -226,7 +254,7 @@
 				header b {
 					font-size: 44px;
 					margin-top: -114px;
-					margin-left: 60%
+					margin-left: 40%;
 				}
 			}
 			@media (max-width: 1024px){
@@ -240,7 +268,7 @@
 				header b {
 					font-size: 44px;
 					margin-top: -114px;
-					margin-left: 60%
+					margin-left: 40%;
 				}
 				.ym_pay_button {
 					font-size: 26px;
@@ -258,6 +286,12 @@
 					height: 72px;
 					width: 100%;
 				}
+				.admin_button {
+				    position: absolute;
+				    right: 250px;
+				    width: 25%;
+				    height: 5%;	
+				}
 			}
 			@media (max-width: 786px){
 				.description {
@@ -270,23 +304,44 @@
 				}
 				header h1 {
 					font-size: 42px;
+					margin-left: 2%;
 				}
 				header b {
 					font-size: 28px;
+					margin-left: 35%;
 				}
 				.buttons b {
 					left: 250px;
 				}
 				.buttons div {
 					margin-left: -250px;
-				}			
-
+				}
+				.admin_button {
+				    position: absolute;
+				    right: 200px;
+				    width: 35%;
+				    height: 5%;
+				}		
 			}
-			@media (max-width: 386px){
+			@media (max-width: 412px){
 				.buttons b {
 					left: 150px;
 				}
 				.buttons div {
 					margin-left: -150px;
 				}
+				header h1 {
+					font-size: 32px;
+					margin-left: 2%;
+				}
+				header b {
+					font-size: 18px;
+					margin-left: 35%;
+				}
+				.admin_button {
+				    position: absolute;
+				    right: 200px;
+				    width: 35%;
+				    height: 3%;
+				}	
 			}

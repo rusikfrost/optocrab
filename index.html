@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>OPTOCRAB.RU</title>
+	<title>optocrab.ru</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -17,8 +18,13 @@
 </header>
 <main>
 <img class="header_img" src="https://cs8.pikabu.ru/post_img/big/2017/12/18/6/1513588165141395433.jpg">
-<div class="admin_button" @click="admin_open = !admin_open, hidden_admin = !hidden_admin"> admin </div>
+<div class="btn-group admin_button">
+    <button type="button" class="btn btn-info"> Отзывы </button>
+    <button type="button" class="btn btn-info"> О нас </button>
+    <button type="button" class="btn btn-info" @click="admin_open = !admin_open, hidden_admin = !hidden_admin"> Админка </button>
+  </div> 
 	<div class="go_home_static_class" :class="{description: admin_open, hidden_admin: hidden_admin}"><br><br>
+		<b class="close" @click="admin_open = !admin_open, hidden_admin = !hidden_admin"> Х </b>
 		<form action="/admin" method="post">
 		<label> Введите логин </label><br>
 		<input name="login" type="text"><br>
@@ -36,7 +42,7 @@
         <td>{{ row.kg_in_pack }} кг</td>
         <td>{{ row.count }} шт.</td>
         <td>{{ row.price }} руб.</td>
-        <td>{{ row.sum_price }} руб.</td>
+        <td>{{ row.sum_price}} руб.</td>
         <td>{{ row.kg }} кг</td>
       </tr>
       <tr v-if="opened.includes(row.id)">
@@ -64,14 +70,15 @@
 	<input type="hidden" name="quickpay-form" value="donate">    
 	<input type="hidden" name="targets" value="транзакция {order_id}">    
 	<input type="hidden" id="val" name="sum" value="0" data-type="number">    
-	<input type="hidden" name="comment" :value="formcomment">   <input type="hidden" name="need-fio" value="true">    
+	<input type="hidden" name="comment" :value="formcomment">   
+	<input type="hidden" name="need-fio" value="true">    
 	<input type="hidden" name="need-email" value="true">   
 	<input type="hidden" name="need-phone" value="true">    
 	<input type="hidden" name="need-address" value="true">    
 	<div class="ym_pay_button">
-		<label><input type="radio" required name="paymentType" value="PC">Яндекс.Деньгами</label>    
+		<label><input type="radio" required name="paymentType" value="PC">Яндекс Деньгами</label>    
 		<label><input type="radio" required name="paymentType" value="AC">Банковской картой</label>       
-		<button onclick="formcomment_fun()" type="submit" class="btn btn-info" onclick="y_val(vue.sum_full_price)">Оплатить {{sum_full_price}} рублей</button>
+		<button onclick="y_val(vue.sum_full_price)" type="submit" class="btn btn-info">Оплатить {{sum_full_price}} рублей</button>
 	</div>
 </form>
 	<button onclick="formcomment_fun() " class="btn btn-info go_home_button" @click="go_home = !go_home, hidden_go_home = !hidden_go_home">Оплатить наличными при получении</button>
@@ -95,6 +102,117 @@
 	</form>	 <b class="task">{{formcomment}}</b> 
 </div>
 </div></main>
-<script src="public/js/main.js"></script>
+<script>
+	
+const vue = new Vue({
+	el: 'main',
+	data: {
+	  	opened: [],
+	  	rows: [],
+	  	sum_full_price: 0,
+	  	double_rows: [],
+	  	go_home: false,
+	  	hidden_go_home: true,
+	  	admin_open: false,
+	  	hidden_admin: true,
+	  	admin: {login: '', password: ''},
+	  	formcomment: [],
+  },
+	  methods: {
+	  	toggle(id) {
+	    	const index = this.opened.indexOf(id);
+	    	if (index > -1) {
+		    	this.opened.splice(index, 1)
+	    	} else {
+		      	this.opened = [];
+		      	this.opened.push(id)
+	    	}
+	    },
+	    toggle_go_home: function(){
+	    	this.go_home = true;
+	    },
+	    input_number: function(id){
+	    	if (this.rows[id].count > 0){
+		    	this.rows[id].sum_price = this.rows[id].count * this.rows[id].price * this.rows[id].kg_in_pack;
+		    	this.rows[id].kg = this.rows[id].count * this.rows[id].kg_in_pack;
+		    	full_price(this.rows[id].id)
+	    	}
+	    },
+	    minus: function(id) {
+	    	if (this.rows[id].count > 0){
+		    	this.rows[id].count = this.rows[id].count - 1;
+		    	this.rows[id].sum_price = this.rows[id].sum_price - this.rows[id].price * this.rows[id].kg_in_pack;
+		    	this.rows[id].kg = this.rows[id].kg - this.rows[id].kg_in_pack;
+		    	full_price(this.rows[id].id)
+	    	}
+	    },
+	    plus: function(id) {
+	    		this.rows[id].count = Number(this.rows[id].count);
+		    	this.rows[id].count = this.rows[id].count + 1;
+		    	this.rows[id].sum_price = this.rows[id].count * this.rows[id].price * this.rows[id].kg_in_pack;
+		    	this.rows[id].kg = this.rows[id].count * this.rows[id].kg_in_pack;
+		    	full_price(this.rows[id].id, this.rows[id].name, this.rows[id].id,)
+	    	},
+	    admin_send: function() {
+	    		axios.post('/admin', {
+			    	login: this.admin.login,
+			    	password: this.admin.password
+			    })
+	   		},
+	  	},
+	  	mounted() {
+	    axios.post('/products')
+	        .then(function (response) {
+	    console.log(response.data);
+	    vue.rows = response.data;
+	  })
+  }
+});
+
+function full_price(f){
+	vue.double_rows = vue.rows.slice();
+	var arr = vue.double_rows;
+
+	arr.reduce(function (a, b) {
+		if (arr[0].id === 0){
+			arr.splice(0, 1);
+	  		return {sum_price: a.sum_price + b.sum_price};
+		} else {
+			return {sum_price: a.sum_price + b.sum_price};
+		}	
+	})
+	console.log(arr.reduce((a, b) => ({sum_price: a.sum_price + b.sum_price})));
+	var spr = arr.reduce((a, b) => ({sum_price: a.sum_price + b.sum_price})); 
+	vue.sum_full_price = spr.sum_price;
+	console.log(spr.sum_price + '------')
+	vue.submit_button_value = 'Оплатить '+spr.sum_price+' рублей';
+
+vue.formcomment = [];
+
+
+
+}
+
+function formcomment_fun() {
+	i=1;
+while (i < vue.rows.length) {
+	var formcomment_arry = vue.rows[i].kg + ' kg ' + vue.rows[i].name + ' - ' + vue.rows[i].count + ' упаковок на ' + vue.rows[i].sum_price + ' рублей' 
+ 	vue.formcomment.push(formcomment_arry);
+
+ //	if (vue.rows[i].count > 3){
+ 	//	vue.rows[i].sum_price = vue.rows[i].sum_price - vue.rows[i].sum_price * 0.3;
+ 	//} 
+
+  i++;
+}
+}
+
+function y_val(yv) {
+	document.getElementById("val").value = yv + ".00";
+	console.log(yv)
+	formcomment_fun()
+}
+
+</script>
 </body>
 </html>
