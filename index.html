@@ -17,11 +17,13 @@
 	<b>+7(912)22-22-222</b>
 </header>
 <main>
+		<div :class="{ modal_big_background: go_home | admin_open | ask_a_question | reviews_open | aboutus_open | go_home }"></div> 
 <img class="header_img" src="https://cs8.pikabu.ru/post_img/big/2017/12/18/6/1513588165141395433.jpg">
 <div class="btn-group admin_button">
-    <button type="button" class="btn btn-info" @click="reviews_open = !reviews_open"><b> Отзывы </b></button>
-    <button type="button" class="btn btn-info" @click="aboutus_open = !aboutus_open"><b>  О нас </b></button>
-    <button type="button" class="btn btn-info" @click="admin_open = !admin_open"><b>  Админка </b></button>
+    <button class="btn btn-info" @click="reviews_open = !reviews_open"><b> Отзывы </b></button>
+    <button class="btn btn-info ask_a_question" @click="ask_a_question = !ask_a_question"><b> Задать вопрос </b></button>
+    <button class="btn btn-info" @click="aboutus_open = !aboutus_open"><b>  О нас </b></button>
+    <button class="btn btn-info" @click="admin_open = !admin_open"><b>  Админка </b></button>
 </div> 
 		<!-- АДМИНКА -->
 	<div v-if="admin_open" class="description"><br><br>
@@ -34,6 +36,20 @@
 			<button type="submit" class="btn btn-info " @click="admin_send"> go </button>
 		</form>
 	</div>
+
+
+	<div v-else-if="ask_a_question" class="description reviews_form"><br><br>
+		<b class="close" @click="ask_a_question = !ask_a_question"> Х </b>
+			<label>Введите Ваше имя </label><br>
+			<input v-model="ask_a_question_post.ask_a_question_name" required type="text"><br>
+			<label> Введите email </label><br>
+			<input v-model="ask_a_question_post.ask_a_question_email" required type="email"><br>
+			<label> Введите Вопрос </label><br>
+			<textarea v-model="ask_a_question_post.ask_a_question_text" required></textarea><br>
+			<button type="submit" class="btn btn-info" @click="ask_a_question_send"> go </button>
+
+	</div>
+
 			<!-- ОТЗЫВЫ -->
 	<div v-else-if="reviews_open" class="description"><br><br>
 		<b class="close" @click="reviews_open = !reviews_open"> Х </b>
@@ -50,7 +66,7 @@
 			<label>Введите Ваше имя </label><br>
 			<input v-model="review_post.review_name" required type="text"><br>
 			<label> Введите email </label><br>
-			<input v-model="review_post.review_email" required type="email"><br>
+			<input v-model="review_post.review_email" required type="email"><br>go_home
 			<label> Введите отзыв </label><br>
 			<textarea v-model="review_post.review_text" required></textarea><br>
 			<button type="submit" class="btn btn-info" @click="review_send"> go </button>
@@ -78,8 +94,10 @@ Some TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome Tex
       </tr>
       <tr v-if="opened.includes(row.id)">
       	<div class="modal_background">
-	        <td class="description" :id="'desc_id'+row.id" colspan="2">{{ row.description }}      
-	        	<div class="buttons"> <b @click="toggle(row.id)"> Х </b>
+	        <td class="description" :id="'desc_id'+row.id" colspan="2">
+	        	<b class="close" @click="toggle(row.id)"> Х </b>
+	        	{{ row.description }}      
+	        	<div class="buttons"> 
 	        		<div>
 	        			<p>Всего: <input @click="input_number(row.id)" v-on:keyup="input_number(row.id)" type="number" v-model="row.count"> упаковок </p> <p> Общий вес: {{ row.kg }} кг </p> <p> Товар: {{ row.sum_price }} рублей </p> <p class="sum"> Итого к оплате {{sum_full_price}} рублей</p>
 	        		</div>
@@ -113,9 +131,11 @@ Some TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome Tex
 	</div>
 </form>
 	<button onclick="formcomment_fun() " class="btn btn-info go_home_button" @click="go_home = !go_home, hidden_go_home = !hidden_go_home">Оплатить наличными при получении</button>
+	<!--<button class="btn btn-info ask_a_question" @click="">Задать вопрос</button>-->
 
 <div class="go_home_static_class" v-bind:class="{ description: go_home, hidden_go_home: hidden_go_home}">
-	<div class="buttons"> <b @click="hidden_go_home = true, go_home = false"> Х </b></div>
+	<b class="close" @click="hidden_go_home = true, go_home = false"> Х </b>
+	<div class="buttons"></div>
 	<form action="/go_home" method="post">
 	<label>Введите ФИО</label><br>
 	<input type="text" required name="name" placeholder="Фамилия Имя Отчество"><br>
@@ -131,6 +151,7 @@ Some TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome Tex
 	<button class="btn btn-info"> Отправить </button>
 
 	</form>	 <b class="task">{{formcomment}}</b> 
+
 </div>
 </div></main>
 <script>
@@ -149,8 +170,10 @@ const vue = new Vue({
 	  	reviews: [], 
 	  	formcomment: [],
 	  	admin_open: false,
+	  	ask_a_question: false,
 		reviews_open: false,
 	  	aboutus_open: false,
+	  	ask_a_question_post: [],
   	},
 	methods: {
 	  	toggle(id) {
@@ -200,9 +223,20 @@ const vue = new Vue({
 	   				review_text: this.review_post.review_text, 
 	   			}).then(function (response) {
 	    			console.log(response.data);
-	    			//vue.reviews = response.data;
-	  })
-	   		}
+	    			//vue.reviews = response.data;  
+	 			})
+	   		},
+	   	ask_a_question_send: function() {
+	   			axios.post('/question', { 
+	   				ask_a_question_name: this.ask_a_question_post.ask_a_question_name, 
+	   				ask_a_question_email: this.ask_a_question_post.ask_a_question_email, 
+	   				ask_a_question_text: this.ask_a_question_post.ask_a_question_text, 
+	   			}).then(function (response) {
+	    			console.log(response.data);
+	    			vue.reviews = response.data;
+	 			})
+	   		},
+
 	},
 	mounted() {
 	    axios.post('/products')

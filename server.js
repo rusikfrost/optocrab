@@ -7,7 +7,7 @@ const 	path = require('path');
 const 	date = require('date-and-time');
 const	favicon = require('serve-favicon');
 const	MongoClient = require('mongodb').MongoClient;
-const	url = "mongodb://localhost:27017/";
+const	urlm = "mongodb://localhost:27017/";
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
 })
 
 app.post('/products', function (req, res) {
-	MongoClient.connect(url, function(err, db) {
+	MongoClient.connect(urlm, function(err, db) {
 		var dbo = db.db("mydb");
 	 	dbo.collection('test_products').find({}).sort( { id: 1 } ).toArray(function(err, result)  {
 	 		//res.send(result)
@@ -29,7 +29,7 @@ app.post('/products', function (req, res) {
 	    });
 	});
 	function review_find(result) {
-		MongoClient.connect(url, function(err, db) {
+		MongoClient.connect(urlm, function(err, db) {
 			var dbo = db.db("mydb");
 		 	dbo.collection('test_reviews').find({}).sort( { date: 1 } ).toArray(function(review_err, review_result)  {
 		 		res.send({review_result: review_result, product_result: result})
@@ -70,7 +70,7 @@ app.post('/admin', function (req, res) {
 
 app.post('/change_product', function (req, res) {
 
-		MongoClient.connect(url, function(err, db) {
+		MongoClient.connect(urlm, function(err, db) {
 		var dbo = db.db("mydb");
 	var myquery = {id: req.body};
 	var newvalues = { $setOnInsert: req.body };
@@ -85,7 +85,7 @@ app.post('/change_product', function (req, res) {
 })
 
 app.post('/delete_product', function (req, res) {
-		MongoClient.connect(url, function(err, db) {
+		MongoClient.connect(urlm, function(err, db) {
 		var dbo = db.db("mydb");
 	 	dbo.collection('test_products').remove({id: req.body.id, name: req.body.name}, function(err, res) {
     		if (err) throw err;
@@ -98,19 +98,24 @@ app.post('/delete_product', function (req, res) {
 
 app.post('/go_home', function (req, res) {
 	console.log(req.body)
-		var url = encodeURI("https://api.vk.com/api.php?oauth=1&method=messages.send&user_id=300397513&message="+"req.body.task"+"&v=5.67&access_token=e18295dcb57646dce3ab05d11d9766507573ddbc2e6cdce7c99d5de3956aafe83cea3b4f349f297610091");
+	var url = encodeURI("https://api.vk.com/api.php?oauth=1&method=messages.send&user_id=300397513&message="+req.body.name + '\n' + req.body.phone + '\n'  + req.body.sity + '\n'  + req.body.adress + '\n \n'  + req.body.task +"&v=5.67&access_token=e18295dcb57646dce3ab05d11d9766507573ddbc2e6cdce7c99d5de3956aafe83cea3b4f349f297610091");
 	needle.get(url, function(err, resp){
 	  if (!err && resp.statusCode == 200);
 	  console.log();
+	  res.send("<h1> Спасибо, Ваша заявка принята, мы свяжемся с Вами в ближайшее время. </h1>")
+	})
+})
+app.post('/question', function (req, res) {
+	console.log(req.body)
+	var url = encodeURI("https://api.vk.com/api.php?oauth=1&method=messages.send&user_id=300397513&message="+req.body.ask_a_question_name + '\n' + req.body.ask_a_question_email + '\n'  + req.body.ask_a_question_text +"&v=5.67&access_token=e18295dcb57646dce3ab05d11d9766507573ddbc2e6cdce7c99d5de3956aafe83cea3b4f349f297610091");
+	needle.get(url, function(err, resp){
+	  if (!err && resp.statusCode == 200);
+	  console.log();
+	  //res.send("<h1> Спасибо, Ваша заявка принята, мы свяжемся с Вами в ближайшее время. </h1>")
 	})
 })
 
 
-		var urln = encodeURI("https://api.vk.com/api.php?oauth=1&method=messages.send&user_id=300397513&message=req.body.task&v=5.67&access_token=e18295dcb57646dce3ab05d11d9766507573ddbc2e6cdce7c99d5de3956aafe83cea3b4f349f297610091");
-	needle.get(urln, function(err, resp){
-	  if (!err && resp.statusCode == 200);
-	  console.log();
-	})
 
 app.listen(3002)
 console.log('-Server started-') 
