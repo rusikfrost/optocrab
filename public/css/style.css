@@ -24,8 +24,6 @@
 			    font-size: 42px;
 			}
 			.header_img {
-
-				/*clip-path: polygon(0 40%, 100% 40%, 100% 70%, 84% 61%, 45% 68%, 25% 64%, 0% 66%, 0 55%);*/
 				clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
 				margin-top: -40%;
 				z-index: -9999;
@@ -44,26 +42,55 @@
 				top: 0%;
 				right: 250px;
 				width: 25%;
-				height: 5%;
-				/*font-size: 24px;
-				padding: 12px;
-				width: 8%;
-				border-radius: 28px;
-				background: #B0C4DE;
-				cursor: pointer; */
 			}
-			/*.admin_button:hover {
-				left: 95%;
-				transition: 0.3s;
-			}*/
+			.reviews_form {
+
+			}
+			.reviews_form label {
+				font-size: 24px;
+			}
+			.reviews_form input {
+				font-size: 24px;
+				padding: 8px;
+				width: 30%;
+				height: 40px;
+				background: #FAEBD7;
+			}
+			.reviews_form textarea {
+				font-size: 24px;
+				padding: 8px;
+				width: 30%;
+				height: 200px;
+				background: #FAEBD7
+			}
+			.reviews_form button {
+				width: 30%;
+				height: 40px;
+			}
+			.reviews_window {
+				position: absolute;
+			    overflow-y: scroll;
+			    left: 35%;
+			    height: 83%;
+			    width: 65%;
+			}
+			.review {
+				border-bottom: 1px dashed black;
+			}
+			.review b {
+				font-size: 24px;
+				color: #117a8b;
+			}
+			.review p {
+				font-size: 22px;
+
+			}
 			#app {
 				margin-top: -30%;
 			}
 			tr:hover {
 				background: #ADD8E6;
 				transition: 0.1s;
-
-				/*clip-path: polygon(100% 0, 99% 22%, 100% 34%, 100% 47%, 98% 80%, 100% 100%, 0 100%, 0 0);*/
 			}
 			table {
 				width: 100%;
@@ -86,11 +113,13 @@
 				background: #FFEBCD;
 				min-height: 400px;
 				width: 60%;
+				min-height: 41%;
 				border: 1px dashed black;
 				left: 20%;
 				top: 20%;
 				padding: 20px;
 				z-index: 1;
+				border-top: 48px solid #117a8b;
 			}
 			#id0 {
 				font-weight: bold;
@@ -120,8 +149,8 @@
 			    border: 2px dashed black;
 			    border-radius: 8px;
 			    padding: 10px;
-			    top: -22px;
-			    left: 900px;
+			    top: -45px;
+			    left: 96%;
 			    color: #fff;
 			    background-color: #dc3545;
 			    border-color: #dc3545;
@@ -138,8 +167,8 @@
 				border: 2px dashed black;
 				border-radius: 8px;
 				padding: 10px;
-				top: -398px;
-				left: 360px;
+  				top: -420px;
+				left: 96%;
 				color: #fff;
     			background-color: #dc3545;
     			border-color: #dc3545;
@@ -154,8 +183,7 @@
 			.buttons p {
 				font-size: 20px;
 			    margin-top: -30px;
-			    margin-right: 0px;
-
+			    margin-right: 20px;
 			}
 			.buttons div {
 				display: flex;
@@ -290,7 +318,7 @@
 				    position: absolute;
 				    right: 250px;
 				    width: 25%;
-				    height: 5%;	
+				   
 				}
 			}
 			@media (max-width: 786px){
@@ -320,7 +348,7 @@
 				    position: absolute;
 				    right: 200px;
 				    width: 35%;
-				    height: 5%;
+				    height: 3%;
 				}		
 			}
 			@media (max-width: 412px){

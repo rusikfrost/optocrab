@@ -4,6 +4,7 @@ const	bodyParser = require('body-parser');
 const	axios = require('axios');
 const 	needle = require('needle');
 const 	path = require('path');
+const 	date = require('date-and-time');
 const	favicon = require('serve-favicon');
 const	MongoClient = require('mongodb').MongoClient;
 const	url = "mongodb://localhost:27017/";
@@ -22,11 +23,41 @@ app.post('/products', function (req, res) {
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("mydb");
 	 	dbo.collection('test_products').find({}).sort( { id: 1 } ).toArray(function(err, result)  {
-	 		res.send(result)
+	 		//res.send(result)
+	 		review_find(result)
 	   		db.close();
 	    });
 	});
+	function review_find(result) {
+		MongoClient.connect(url, function(err, db) {
+			var dbo = db.db("mydb");
+		 	dbo.collection('test_reviews').find({}).sort( { date: 1 } ).toArray(function(review_err, review_result)  {
+		 		res.send({review_result: review_result, product_result: result})
+		   		db.close();
+		    });
+		});
+	}
 });
+
+app.post('/review', function (req, res) {
+	let now = new Date();
+	console.log(req.body + date.format(now, 'YYYY MMM DD HH:mm'));
+
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("mydb");
+		const review_query = {	
+			review_name: req.body.review_name, 
+			review_email: req.body.review_email, 
+			review_text: req.body.review_text,
+			review_date:  date.format(now, 'YYYY MMM DD HH:mm')
+		}
+	 	dbo.collection('test_reviews').insertOne( review_query, function(err, res) {
+    		if (err) throw err;
+    		db.close();
+  		});
+	});
+	//res.send()
+})
 
 app.post('/admin', function (req, res) {
 	if (req.body.login === 'admin' && req.body.password === '1243') {

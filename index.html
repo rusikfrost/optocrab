@@ -19,38 +19,69 @@
 <main>
 <img class="header_img" src="https://cs8.pikabu.ru/post_img/big/2017/12/18/6/1513588165141395433.jpg">
 <div class="btn-group admin_button">
-    <button type="button" class="btn btn-info"> Отзывы </button>
-    <button type="button" class="btn btn-info"> О нас </button>
-    <button type="button" class="btn btn-info" @click="admin_open = !admin_open, hidden_admin = !hidden_admin"> Админка </button>
-  </div> 
-	<div class="go_home_static_class" :class="{description: admin_open, hidden_admin: hidden_admin}"><br><br>
-		<b class="close" @click="admin_open = !admin_open, hidden_admin = !hidden_admin"> Х </b>
-		<form action="/admin" method="post">
-		<label> Введите логин </label><br>
-		<input name="login" type="text"><br>
-		<label> Введите Пароль </label><br>
-		<input name="password" type="text"><br><br>
-		<button type="submit" class="btn btn-info " @click="admin_send"> go </button>
+    <button type="button" class="btn btn-info" @click="reviews_open = !reviews_open"><b> Отзывы </b></button>
+    <button type="button" class="btn btn-info" @click="aboutus_open = !aboutus_open"><b>  О нас </b></button>
+    <button type="button" class="btn btn-info" @click="admin_open = !admin_open"><b>  Админка </b></button>
+</div> 
+		<!-- АДМИНКА -->
+	<div v-if="admin_open" class="description"><br><br>
+		<b class="close" @click="admin_open = !admin_open"> Х </b>
+		<form class="reviews_form" action="/admin" method="post">
+			<label> Введите логин </label><br>
+			<input name="login" type="text"><br>
+			<label> Введите Пароль </label><br>
+			<input name="password" type="text"><br><br>
+			<button type="submit" class="btn btn-info " @click="admin_send"> go </button>
 		</form>
+	</div>
+			<!-- ОТЗЫВЫ -->
+	<div v-else-if="reviews_open" class="description"><br><br>
+		<b class="close" @click="reviews_open = !reviews_open"> Х </b>
 
-</div><div id="app"></div>
+		<div class="reviews_window">
+			<div class="review"  v-for="review in reviews">
+				<b>{{review.review_name}}</b>
+				<p>{{review.review_text}}</p>
+				{{review.review_date}}
+			</div>
+
+		</div>
+		<div class="reviews_form">
+			<label>Введите Ваше имя </label><br>
+			<input v-model="review_post.review_name" required type="text"><br>
+			<label> Введите email </label><br>
+			<input v-model="review_post.review_email" required type="email"><br>
+			<label> Введите отзыв </label><br>
+			<textarea v-model="review_post.review_text" required></textarea><br>
+			<button type="submit" class="btn btn-info" @click="review_send"> go </button>
+		</div>
+	</div>
+
+			<!-- О НАС -->
+	<div v-else-if="aboutus_open" class="description"><br><br>
+		<b class="close" @click="aboutus_open = !aboutus_open"> Х </b>
+Some TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome Text
+	</div>
+
+
+<div id="app"></div>
   <table>
     <template v-for="row in rows">
       <tr @click="toggle(row.id)" :class="{ opened: opened.includes(row.id) }" :id="'id'+row.id">
         <td><img :src="row.photo"></td>
-        <td><b>{{ row.name }}</b></td>
-        <td>{{ row.kg_in_pack }} кг</td>
-        <td>{{ row.count }} шт.</td>
-        <td>{{ row.price }} руб.</td>
-        <td>{{ row.sum_price}} руб.</td>
-        <td>{{ row.kg }} кг</td>
+        <td><b> {{ row.name }} </b></td>
+        <td> {{ row.kg_in_pack }} кг</td>
+        <td> {{ row.count }} шт.</td>
+        <td> {{ row.price }} руб.</td>
+        <td> {{ row.sum_price}} руб.</td>
+        <td> {{ row.kg }} кг</td>
       </tr>
       <tr v-if="opened.includes(row.id)">
       	<div class="modal_background">
 	        <td class="description" :id="'desc_id'+row.id" colspan="2">{{ row.description }}      
 	        	<div class="buttons"> <b @click="toggle(row.id)"> Х </b>
 	        		<div>
-	        			<p>Всего: <input @click="input_number(row.id)" v-on:keyup="input_number(row.id)" type="number" v-model="row.count"> упаковок</p> <p>Общий вес: {{ row.kg }} кг</p> <p>Товар: {{ row.sum_price }} рублей</p> <p class="sum">Итого к оплате {{sum_full_price}} рублей</p>
+	        			<p>Всего: <input @click="input_number(row.id)" v-on:keyup="input_number(row.id)" type="number" v-model="row.count"> упаковок </p> <p> Общий вес: {{ row.kg }} кг </p> <p> Товар: {{ row.sum_price }} рублей </p> <p class="sum"> Итого к оплате {{sum_full_price}} рублей</p>
 	        		</div>
 			     	<button type="button" @click="plus(row.id)" class="btn btn-info">Добавить ед.</button> 
 			      	<button type="button" @click="minus(row.id)" class="btn btn-danger">Убрать ед.</button> 
@@ -113,12 +144,15 @@ const vue = new Vue({
 	  	double_rows: [],
 	  	go_home: false,
 	  	hidden_go_home: true,
-	  	admin_open: false,
-	  	hidden_admin: true,
-	  	admin: {login: '', password: ''},
+	  	admin: { login: '', password: '' },
+	  	review_post: {},
+	  	reviews: [], 
 	  	formcomment: [],
-  },
-	  methods: {
+	  	admin_open: false,
+		reviews_open: false,
+	  	aboutus_open: false,
+  	},
+	methods: {
 	  	toggle(id) {
 	    	const index = this.opened.indexOf(id);
 	    	if (index > -1) {
@@ -159,12 +193,23 @@ const vue = new Vue({
 			    	password: this.admin.password
 			    })
 	   		},
-	  	},
-	  	mounted() {
+	   	review_send: function() {
+	   			axios.post('/review', { 
+	   				review_name: this.review_post.review_name, 
+	   				review_email: this.review_post.review_email, 
+	   				review_text: this.review_post.review_text, 
+	   			}).then(function (response) {
+	    			console.log(response.data);
+	    			//vue.reviews = response.data;
+	  })
+	   		}
+	},
+	mounted() {
 	    axios.post('/products')
 	        .then(function (response) {
 	    console.log(response.data);
-	    vue.rows = response.data;
+	    vue.rows = response.data.product_result;
+	    vue.reviews = response.data.review_result;
 	  })
   }
 });
@@ -195,16 +240,11 @@ vue.formcomment = [];
 
 function formcomment_fun() {
 	i=1;
-while (i < vue.rows.length) {
-	var formcomment_arry = vue.rows[i].kg + ' kg ' + vue.rows[i].name + ' - ' + vue.rows[i].count + ' упаковок на ' + vue.rows[i].sum_price + ' рублей' 
- 	vue.formcomment.push(formcomment_arry);
-
- //	if (vue.rows[i].count > 3){
- 	//	vue.rows[i].sum_price = vue.rows[i].sum_price - vue.rows[i].sum_price * 0.3;
- 	//} 
-
-  i++;
-}
+	while (i < vue.rows.length) {
+		var formcomment_arry = vue.rows[i].kg + ' kg ' + vue.rows[i].name + ' - ' + vue.rows[i].count + ' упаковок на ' + vue.rows[i].sum_price + ' рублей' 
+	 	vue.formcomment.push(formcomment_arry);
+	  i++;
+	}
 }
 
 function y_val(yv) {
