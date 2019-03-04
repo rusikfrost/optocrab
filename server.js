@@ -43,7 +43,7 @@ app.post('/review', function (req, res) {
 	let now = new Date();
 	console.log(req.body + date.format(now, 'YYYY MMM DD HH:mm'));
 
-	MongoClient.connect(url, function(err, db) {
+	MongoClient.connect(urlm, function(err, db) {
 		var dbo = db.db("mydb");
 		const review_query = {	
 			review_name: req.body.review_name, 
@@ -89,12 +89,26 @@ app.post('/delete_product', function (req, res) {
 		var dbo = db.db("mydb");
 	 	dbo.collection('test_products').remove({id: req.body.id, name: req.body.name}, function(err, res) {
     		if (err) throw err;
-    			console.log("1 document updated");
+    			console.log("1 document removed");
     		db.close();
   		});
 	});
 	console.log(req.body)
 })
+
+app.post('/delete_review', function (req, res) {
+		MongoClient.connect(urlm, function(err, db) {
+		var dbo = db.db("mydb");
+	 	dbo.collection('test_reviews').remove({review_text: req.body.review_text, review_name: req.body.review_name}, function(err, res) {
+    		if (err) throw err;
+    			console.log("1 document removed");
+    		db.close();
+  		});
+	});
+	console.log(req.body)
+})
+
+
 
 app.post('/go_home', function (req, res) {
 	console.log(req.body)

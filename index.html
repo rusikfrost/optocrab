@@ -17,7 +17,7 @@
 	<b>+7(912)22-22-222</b>
 </header>
 <main>
-		<div :class="{ modal_big_background: go_home | admin_open | ask_a_question | reviews_open | aboutus_open | go_home }"></div> 
+		<div :class="{ modal_big_background: go_home | opened_desc | admin_open | ask_a_question | reviews_open | aboutus_open | go_home }"></div> 
 <img class="header_img" src="https://cs8.pikabu.ru/post_img/big/2017/12/18/6/1513588165141395433.jpg">
 <div class="btn-group admin_button">
     <button class="btn btn-info" @click="reviews_open = !reviews_open"><b> Отзывы </b></button>
@@ -83,7 +83,7 @@ Some TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome Tex
 <div id="app"></div>
   <table>
     <template v-for="row in rows">
-      <tr @click="toggle(row.id)" :class="{ opened: opened.includes(row.id) }" :id="'id'+row.id">
+      <tr @click="toggle(row.id), opened_desc = !opened_desc" :class="{ opened: opened.includes(row.id) }" :id="'id'+row.id">
         <td><img :src="row.photo"></td>
         <td><b> {{ row.name }} </b></td>
         <td> {{ row.kg_in_pack }} кг</td>
@@ -95,7 +95,7 @@ Some TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome Tex
       <tr v-if="opened.includes(row.id)">
       	<div class="modal_background">
 	        <td class="description" :id="'desc_id'+row.id" colspan="2">
-	        	<b class="close" @click="toggle(row.id)"> Х </b>
+	        	<b class="close" @click="toggle(row.id), opened_desc = false"> Х </b>
 	        	{{ row.description }}      
 	        	<div class="buttons"> 
 	        		<div>
@@ -173,6 +173,7 @@ const vue = new Vue({
 	  	ask_a_question: false,
 		reviews_open: false,
 	  	aboutus_open: false,
+	  	opened_desc: false,
 	  	ask_a_question_post: [],
   	},
 	methods: {

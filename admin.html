@@ -67,8 +67,15 @@
 			<input type="number" v-model="change.price" placeholder="Цена килограмма"></label>
 			<textarea v-model="change.description" placeholder="Описание товара"></textarea>
 		<label><button @click="change_product">change</button></label>
-</div>
+</div> <br> <br>
 
+
+			<div class="review"  v-for="review in reviews">
+				<b>{{review.review_name}}</b>
+				<p>{{review.review_text}}</p>
+				{{review.review_date}}
+				<button @click="delete_review(review)">X</button>
+			</div>
 </main>
 <script>
 
@@ -76,6 +83,7 @@ var admin_vue = new Vue ({
 	el: 'main',
 	data: {
 		rows: [],
+		reviews: [],
 		delete_button: '',
 		change: { id: 0, photo: '', name: '', kg_in_pack: 0, price: 0, count: 0, sum_price: 0, kg: 0, description: ''}
 	},
@@ -88,15 +96,19 @@ var admin_vue = new Vue ({
 		},
 		change_product: function() {
 			axios.post('/change_product', this.change)
-	        .then(function (response) {
-	 	 })
+	        .then(function (response) {})
+		}, 
+		delete_review: function(x) {
+			axios.post('/delete_review', x)
+	        .then(function (response) {})
 		}
 	},
 	mounted() {
 	    axios.post('/products')
 	        .then(function (response) {
 	    console.log(response.data);
-	    admin_vue.rows = response.data;
+	    admin_vue.rows = response.data.product_result;
+	    admin_vue.reviews = response.data.review_result;
 	  })
   }
 })
