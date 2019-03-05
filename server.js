@@ -59,6 +59,54 @@ app.post('/review', function (req, res) {
 	//res.send()
 })
 
+
+/*
+
+	MongoClient.connect(urlm, function(err, db) {
+		var dbo = db.db("mydb");
+		const review_query = 
+[{review_name: 'Миша 2019',
+  review_email: '',
+  review_text: 'Сотрудничеством довольны, так держать!',
+  review_date: '2019 Mar 04 11:03' },
+
+{ review_name: 'Крабы супер',
+  review_email: '',
+  review_text: 'Супер',
+  review_date: '2019 Feb 26 14:55' },
+
+{ review_name: 'Александр',
+  review_email: '',
+  review_text: '23 числа хватило на большую компанию.. до тбилисской доставил быстро, все довольны, спасибо Константин, будем брать ещё на 8 маарта..',
+  review_date: '2019 Feb 24 18:38' },
+
+{ review_name: 'Gena76',
+  review_email: '',
+  review_text: 'Крабами! и креветками довольные',
+  review_date: '2019 Feb 23 20:14' },
+
+{ review_name: 'qqqqqq',
+  review_email: '',
+  review_text: 'Икра настоящяя, на перепродаже покупают хорошо',
+  review_date: '2019 Feb 03 22:59' },
+
+{ review_name: 'Василий Вавилов',
+  review_email: '',
+  review_text: 'купил в кафе на пробу людям нравится. купил еще отпишусь',
+  review_date: '2019 Jan 13 14:11' },
+
+{ review_name: 'Andrey',
+  review_email: '',
+  review_text: 'Заказали на новый год крабов 1 пачку. Привезли, хватило на все праздники. Очень вкусные с пивом.',
+  review_date: '2019 Jan 04 12:35' }]
+
+	 	dbo.collection('test_reviews').insert( review_query, function(err, res) {
+    		if (err) throw err;
+    		db.close();
+  		});
+	});
+*/
+
 app.post('/admin', function (req, res) {
 	if (req.body.login === 'admin' && req.body.password === '1243') {
 			res.sendFile(__dirname + '/admin.html')	
