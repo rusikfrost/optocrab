@@ -47,6 +47,22 @@
 			<label> Введите Вопрос </label><br>
 			<textarea v-model="ask_a_question_post.ask_a_question_text" required></textarea><br>
 			<button type="submit" class="btn btn-info" @click="ask_a_question_send"> go </button>
+			<div class="scroll">
+				<h3> Часто задаваемые вопросы:</h3>
+				<b>Насколько долго осуществляется доставка?</b>
+				<p>Доставка осуществляется с г.Белореченска до Вашего населённого пункта. Во временные рамки включены - погрузка и сама доставка. В среднем от 1 до 4 часов, в зависимости от погодных условий и дальности поставки.</p>
+				<hr>
+				<b>По каким регионам производится доставка?</b>
+				<p>В настоящее время доставка производится по Краснодарскому краю, республиках Адыгея и Крым.</p>
+				<hr>
+				<b>Почему такие низкие цены?</b>
+				<p>Мы ведём сотрудничество напрямую с дальневосточными производителями и не имеем огромного числа посредников. Возможны заключения контрактов с последующим понижением цены, авиадоставка и более широкий выбор товара. </p>
+				<hr>
+				<b>Как заказать морепродукты на сайте?</b>
+				<p>Выбираете количество товаров для заказа, далее удобный способ оплаты и заполняете контактные данные. Далее мы Вам перезвоним и уточним подробности заказа. </p> 
+				<hr>
+
+			</div>
 
 	</div>
 
@@ -66,7 +82,7 @@
 			<label>Введите Ваше имя </label><br>
 			<input v-model="review_post.review_name" required type="text"><br>
 			<label> Введите email </label><br>
-			<input v-model="review_post.review_email" required type="email"><br>go_home
+			<input v-model="review_post.review_email" required type="email"><br>
 			<label> Введите отзыв </label><br>
 			<textarea v-model="review_post.review_text" required></textarea><br>
 			<button type="submit" class="btn btn-info" @click="review_send"> go </button>
@@ -76,7 +92,9 @@
 			<!-- О НАС -->
 	<div v-else-if="aboutus_open" class="description"><br><br>
 		<b class="close" @click="aboutus_open = !aboutus_open"> Х </b>
-Some TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome Text
+		<div style="font-size: 24px;">
+		Наша фирма занимается поставкой морепродуктов на склад в г.Белореченске и в дальнейшем по Краснодарскому краю, республике Адыгея и республике Крым. В настоящее время доступна доставка автомобильным транспортом и авиадоставка. Для оптовых клиентов цены могут быть снижены, возможны регулярные поставки. Мы гарантируем самые низкие цены на Юге России и качественные морепродукты с Дальнего Востока. С вопросами просим обращаться по телефону +?938к3430493 или в "Задать вопрос" на нашем сайте. <br> С уважением, Ваш Оптокраб.
+		</div>
 	</div>
 
 
