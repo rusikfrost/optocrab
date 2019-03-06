@@ -160,11 +160,38 @@ app.post('/delete_review', function (req, res) {
 
 app.post('/go_home', function (req, res) {
 	console.log(req.body)
-	var url = encodeURI("https://api.vk.com/api.php?oauth=1&method=messages.send&user_id=300397513&message="+req.body.name + '\n' + req.body.phone + '\n'  + req.body.sity + '\n'  + req.body.adress + '\n \n'  + req.body.task +"&v=5.67&access_token=e18295dcb57646dce3ab05d11d9766507573ddbc2e6cdce7c99d5de3956aafe83cea3b4f349f297610091");
+	const remainder =	req.body.sum_full_price - req.body.prepayment;
+	var url = encodeURI("https://api.vk.com/api.php?oauth=1&method=messages.send&user_id=300397513&message="
+		+ 'ФИО \n'
+		+req.body.name 
+		+ '\n \nномер телефона: \n' 
+		+ req.body.phone 
+		+ '\n \nпочта: \n'  
+		+ req.body.email 
+		+ '\n \nГород: \n' 
+		+ req.body.sity 
+		+ '\n \nАдрес: \n'  
+		+ req.body.adress 
+		+ '\n \nПолная стоимость: \n' 
+		+  req.body.sum_full_price 
+		+ '\n \nНаличная оплата: \n' 
+		+  remainder 
+		+ '\n \nПредоплата: \n' 
+		+  req.body.prepayment 
+		+ '\n \nКомментарий: \n' 
+		+  req.body.comment 
+		+ '\n \n \nПодробный заказ \n'  
+		+ req.body.task 
+
+		+"&v=5.67&access_token=e18295dcb57646dce3ab05d11d9766507573ddbc2e6cdce7c99d5de3956aafe83cea3b4f349f297610091");
 	needle.get(url, function(err, resp){
 	  if (!err && resp.statusCode == 200);
 	  console.log();
-	  res.send("<h1> Спасибо, Ваша заявка принята, мы свяжемся с Вами в ближайшее время. </h1>")
+	  res.send(
+	   "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css'>"
+	   	+"<style> 	body {background: #FAEBD7;font-family: 'Neucha', cursive;} </style> <h1 class='alert alert-success'> Спасибо, Ваша заявка принята, мы отправим Вам счет на оплату в ближайшее время на указанный почтовый ящик: <a class='alert-link' href='mailto:"
+	  	+req.body.email +"'>"+req.body.email + 
+	  	"</a> <br> <br> Если товара на складе в данный момент нет, мы оповестим Вас. <br> Вопросы по телефону: <b>+7(918)263-57-86</b></h1>")
 	})
 })
 app.post('/question', function (req, res) {

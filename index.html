@@ -2,14 +2,15 @@
 <html>
 <head>
 	<title>optocrab.ru</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-		<link href="https://fonts.googleapis.com/css?family=Caveat|Comfortaa|M+PLUS+Rounded+1c|Neucha|Poiret+One|Vollkorn" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="public/css/style.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Caveat|Comfortaa|M+PLUS+Rounded+1c|Neucha|Poiret+One|Vollkorn" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="public/css/style.css">
 </head>
 <body>
 <header>
@@ -19,12 +20,15 @@
 <main>
 		<div :class="{ modal_big_background: go_home | opened_desc | admin_open | ask_a_question | reviews_open | aboutus_open | go_home }"></div> 
 <img class="header_img" src="https://cs8.pikabu.ru/post_img/big/2017/12/18/6/1513588165141395433.jpg">
+
 <div class="btn-group admin_button">
     <button class="btn btn-info" @click="reviews_open = !reviews_open"><b> Отзывы </b></button>
     <button class="btn btn-info ask_a_question" @click="ask_a_question = !ask_a_question"><b> Задать вопрос </b></button>
     <button class="btn btn-info" @click="aboutus_open = !aboutus_open"><b>  О нас </b></button>
     <button class="btn btn-info" @click="admin_open = !admin_open"><b>  Админка </b></button>
 </div> 
+
+
 		<!-- АДМИНКА -->
 	<div v-if="admin_open" class="description"><br><br>
 		<b class="close" @click="admin_open = !admin_open"> Х </b>
@@ -33,20 +37,24 @@
 			<input name="login" type="text"><br>
 			<label> Введите Пароль </label><br>
 			<input name="password" type="text"><br><br>
-			<button type="submit" class="btn btn-info " @click="admin_send"> go </button>
+			<button type="submit" class="btn btn-info " @click="admin_send"> Перейти </button>
 		</form>
 	</div>
 
 
 	<div v-else-if="ask_a_question" class="description reviews_form"><br><br>
 		<b class="close" @click="ask_a_question = !ask_a_question"> Х </b>
+		<div v-if="ask_a_question_checked"><h3>Спасибо, Ваш вопрос принят,<br>ответ придет на email.</h3></div>
+		<div v-else >
+
 			<label>Введите Ваше имя </label><br>
 			<input v-model="ask_a_question_post.ask_a_question_name" required type="text"><br>
 			<label> Введите email </label><br>
 			<input v-model="ask_a_question_post.ask_a_question_email" required type="email"><br>
 			<label> Введите Вопрос </label><br>
 			<textarea v-model="ask_a_question_post.ask_a_question_text" required></textarea><br>
-			<button type="submit" class="btn btn-info" @click="ask_a_question_send"> go </button>
+			<button type="submit" class="btn btn-info" @click="ask_a_question_send, ask_a_question_checked = true"> Задать вопрос </button>
+		</div>
 			<div class="scroll">
 				<h3> Часто задаваемые вопросы:</h3>
 				<b>Насколько долго осуществляется доставка?</b>
@@ -78,14 +86,15 @@
 			</div>
 
 		</div>
-		<div class="reviews_form">
+		<div v-if="reviews_checked"><h3>Спасибо, Ваш отзыв принят</h3></div>
+		<div v-else class="reviews_form">
 			<label>Введите Ваше имя </label><br>
 			<input v-model="review_post.review_name" required type="text"><br>
 			<label> Введите email </label><br>
 			<input v-model="review_post.review_email" required type="email"><br>
 			<label> Введите отзыв </label><br>
 			<textarea v-model="review_post.review_text" required></textarea><br>
-			<button type="submit" class="btn btn-info" @click="review_send"> go </button>
+			<button type="submit" class="btn btn-info" @click="review_send, reviews_checked = true"> Оставить отзыв </button>
 		</div>
 	</div>
 
@@ -159,21 +168,27 @@
 	<input type="text" required name="name" placeholder="Фамилия Имя Отчество"><br>
 	<label>Введите номер телефона</label><br>
 	<input type="phone" required name="phone" placeholder="+79XXXXXXXXX"><br>
+	<label>Введите свой email</label><br>
+	<input type="email" required name="email" placeholder="Email"><br>
 	<label>Введите свой город ( только Краснодарский край и Адыгея )</label><br>
 	<input type="text" required name="sity" placeholder="Город"><br>
 	<label>Введите свой адрес</label><br>
 	<input type="text" required name="adress" placeholder="Улица, Строение"><br>
 	<label>Комментарий к заказу ( по желанию )</label><br>
-	<textarea placeholder="Комментарий"></textarea><br>
+	<textarea name="comment" placeholder="Комментарий"></textarea><br>
+	<input type="hidden" name="prepayment" :value="sum_full_price * 0.25">
+	<input type="hidden" name="sum_full_price" :value="sum_full_price">
 	<input type="hidden" name="task" :value="formcomment">
 	<button class="btn btn-info"> Отправить </button>
 
-	</form>	 <b class="task">{{formcomment}}</b> 
+	</form>	 <br>
+	<p style="font-size: 24px;"><b>Внимание: </b> при наличии товара на складе, вносится предоплата в количестве 25% от суммарной стоимости заказа. В данный момент эта сумма составляет: <b>{{sum_full_price * 0.25}} рублей.</b><br> Счет предоплаты придет на Ваш email.</p>
+	<b class="task">{{formcomment}}</b> 
 
 </div>
 </div></main>
 <script>
-	
+
 const vue = new Vue({
 	el: 'main',
 	data: {
@@ -186,6 +201,8 @@ const vue = new Vue({
 	  	admin: { login: '', password: '' },
 	  	review_post: {},
 	  	reviews: [], 
+	  	reviews_checked: false,
+	  	ask_a_question_checked: false,
 	  	formcomment: [],
 	  	admin_open: false,
 	  	ask_a_question: false,
@@ -193,6 +210,7 @@ const vue = new Vue({
 	  	aboutus_open: false,
 	  	opened_desc: false,
 	  	ask_a_question_post: [],
+	  	success: '  <div class="alert alert-success alert-dismissible fade show"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Success!</strong> This alert box could indicate a successful or positive action. </div>',
   	},
 	methods: {
 	  	toggle(id) {
