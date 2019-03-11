@@ -13,13 +13,30 @@
 	<link rel="stylesheet" type="text/css" href="public/css/style.css">
 </head>
 <body>
+	<div class="app">
+<transition name="bounce"> 
+<div class="banner" v-if="show_banner">
+		<p class="banner_site_name">Optocrab.ru</p>
+		<p class="banner_phone">+7(918)263-57-86</p>	
+
+	<div class="banner_email">example@mail.ru</div>
+	<div class="banner_about">
+		ИНН: В МОДЕРАЦИИ<br>
+		ИП: В МОДЕРАЦИИ<br>
+		В МОДЕРАЦИИ: В МОДЕРАЦИИ В МОДЕРАЦИИ 
+	</div>
+	<div class="banner_button" v-on:click="show_banner = false"> Прайс Лист </div>
+</div>
+</transition>
 <header>
 	<h1>Optocrab.ru</h1>
 	<b>+7(918)263-57-86</b>
 </header>
 <main>
+
 		<div :class="{ modal_big_background: go_home | opened_desc | admin_open | ask_a_question | reviews_open | aboutus_open | go_home }"></div> 
 <img class="header_img" src="https://cs8.pikabu.ru/post_img/big/2017/12/18/6/1513588165141395433.jpg">
+
 
 <div class="btn-group admin_button">
     <button class="btn btn-info" @click="reviews_open = !reviews_open"><b> Отзывы </b></button>
@@ -136,7 +153,6 @@
       </tr>
     </template>
   </table>
-</div>
 <div class="pay_block">
 <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">    
 	<input type="hidden" name="receiver" value="410014146569625">    
@@ -157,7 +173,7 @@
 		<button onclick="y_val(vue.sum_full_price)" type="submit" class="btn btn-info">Оплатить {{sum_full_price}} рублей</button>
 	</div>
 </form>
-	<button onclick="formcomment_fun() " class="btn btn-info go_home_button" @click="go_home = !go_home, hidden_go_home = !hidden_go_home">Оплатить наличными при получении</button>
+	<button onclick="formcomment_fun() " class="btn btn-info go_home_button" @click="go_home = !go_home, hidden_go_home = !hidden_go_home">Оплатить наличными при получении ( предоплата 10% )</button>
 	<!--<button class="btn btn-info ask_a_question" @click="">Задать вопрос</button>-->
 
 <div class="go_home_static_class" v-bind:class="{ description: go_home, hidden_go_home: hidden_go_home}">
@@ -176,13 +192,13 @@
 	<input type="text" required name="adress" placeholder="Улица, Строение"><br>
 	<label>Комментарий к заказу ( по желанию )</label><br>
 	<textarea name="comment" placeholder="Комментарий"></textarea><br>
-	<input type="hidden" name="prepayment" :value="sum_full_price * 0.25">
+	<input type="hidden" name="prepayment" :value="sum_full_price * 0.1">
 	<input type="hidden" name="sum_full_price" :value="sum_full_price">
 	<input type="hidden" name="task" :value="formcomment">
 	<button class="btn btn-info"> Отправить </button>
 
 	</form>	 <br>
-	<p style="font-size: 24px;"><b>Внимание: </b> при наличии товара на складе, вносится предоплата в количестве 25% от суммарной стоимости заказа. В данный момент эта сумма составляет: <b>{{sum_full_price * 0.25}} рублей.</b><br> Счет предоплаты придет на Ваш email.</p>
+	<p style="font-size: 24px;"><b>Внимание: </b> при наличии товара на складе, вносится предоплата в количестве 10% от суммарной стоимости заказа. В данный момент эта сумма составляет: <b>{{sum_full_price * 0.1}} рублей.</b><br> Счет предоплаты придет на Ваш email.</p>
 	<b class="task">{{formcomment}}</b> 
 
 </div>
@@ -190,7 +206,7 @@
 <script>
 
 const vue = new Vue({
-	el: 'main',
+	el: '.app',
 	data: {
 	  	opened: [],
 	  	rows: [],
@@ -209,6 +225,7 @@ const vue = new Vue({
 		reviews_open: false,
 	  	aboutus_open: false,
 	  	opened_desc: false,
+	  	show_banner: true,
 	  	ask_a_question_post: [],
 	  	success: '  <div class="alert alert-success alert-dismissible fade show"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Success!</strong> This alert box could indicate a successful or positive action. </div>',
   	},
@@ -325,5 +342,6 @@ function y_val(yv) {
 }
 
 </script>
+</div>
 </body>
 </html>
