@@ -30,44 +30,44 @@
 				border-radius: 8px;
 				padding: 5px;
 			}
-			.banner_phone {
-				position: absolute;
-			    color: #FAEBD7;
-			    top: 192px;
-			    left: 32%;
-			    font-size: 62px;
-			    background: #17a2b8;
-			    border: 8px dashed #FAEBD7;
-			    border-radius: 8px;
-			    padding: 5px;
-			}
-			.banner_email {
-				position: absolute;
-			    color: #FAEBD7;
-				top: 30%;
-				left: 47%;
-			    font-size: 62px;
-			    background: #17a2b8;
-			    border: 8px dashed #FAEBD7;
-			    border-radius: 8px;
-			    padding: 5px;
-			}
-			.banner_about {
-			    position: absolute;
-			    color: #17a2b8;
-			    top: 44%;
-			    font-size: 42px;
-			    left: 19%;
-			    background: #FAEBD7;
-			    border: 8px dashed #17a2b8;
-			    border-radius: 8px;
-			    padding: 5px;
-			}
-			.banner_button {
-				position: absolute;
-			    color: #FAEBD7;
-			    top: 70%;
-			    left: 43%;
+            .banner_phone {
+	            position: absolute;
+	            color: #FAEBD7;
+	            top: 192px;
+	            left: 36%;
+	            font-size: 62px;
+	            background: #17a2b8;
+	            border: 8px dashed #FAEBD7;
+	            border-radius: 8px;
+	            padding: 5px;
+            }
+            .banner_email {
+	            position: absolute;
+	            color: #FAEBD7;
+	            top: 33%;
+	            left: 47%;
+	            font-size: 62px;
+                background: #17a2b8;
+                border: 8px dashed #FAEBD7;
+                border-radius: 8px;
+                padding: 5px;
+                        }
+            .banner_about {
+                position: absolute;
+                color: #17a2b8;
+                top: 48%;
+                font-size: 42px;
+                left: 19%;
+                background: #FAEBD7;
+                border: 8px dashed #17a2b8;
+                border-radius: 8px;
+                padding: 5px;
+                        }
+            .banner_button {
+                position: absolute;
+                color: #FAEBD7;
+                top: 78%;
+                left: 43%;
 			    font-size: 62px;
 			    background: #17a2b8;
 			    border: 8px dashed #FAEBD7;
@@ -318,14 +318,6 @@
 				height: 155px;
 				font-size: 24px;
 			}
-	/*		.ask_a_question {
-				position: relative;
-				font-size: 36px;
-				top: -64px;
-				left: -50%;
-				height: 144px;
-				width: 400px;
-			} */
 			.task {
 				position: absolute;
 			    margin-left: 48%;
@@ -334,7 +326,7 @@
 			}
 
 
-			@media (max-width: 1264px){
+			@media screen and (min-width: 1025px) and (max-width: 1264px) {
 				.header_img {
 				    margin-top: -45%;
 				}
@@ -353,7 +345,7 @@
 					margin-left: 40%;
 				}
 			}
-		@media (max-width: 1024px) and (min-width: 787px) {
+		@media screen and (min-width: 787px) and (max-width: 1024px) {
 				.description {
 					position: absolute;
 					width: 98%;
@@ -425,7 +417,7 @@
 				    opacity: 1;
 				}
 			}
-		@media (max-width: 786px) {
+		@media screen and (max-width: 786px) {
 
 				.banner_site_name {
 					width: 100%;
@@ -523,7 +515,6 @@
 				    opacity: 1;
 				}
 			}
-
 
 			.bounce-leave-active {
 			  animation: bounce-in .5s reverse;
