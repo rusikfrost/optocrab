@@ -36,7 +36,7 @@
 <main>
 
 		<div :class="{ modal_big_background: go_home | opened_desc | admin_open | ask_a_question | reviews_open | aboutus_open | go_home }"></div> 
-<img class="header_img" src="https://cs8.pikabu.ru/post_img/big/2017/12/18/6/1513588165141395433.jpg">
+<img class="header_img" src="public/back.jpg">
 
 
 <div class="btn-group admin_button">
@@ -174,7 +174,7 @@
 		<button onclick="y_val(vue.sum_full_price)" type="submit" class="btn btn-info">Оплатить {{sum_full_price}} рублей</button>
 	</div>
 </form>
-	<button onclick="formcomment_fun() " class="btn btn-info go_home_button" @click="go_home = !go_home, hidden_go_home = !hidden_go_home">Оплатить наличными при получении ( предоплата 10% )</button>
+	<button onclick="formcomment_fun() " class="btn btn-info go_home_button" @click="go_home = !go_home, hidden_go_home = !hidden_go_home">Оплатить наличными при получении (предоплата 10%)</button>
 	<!--<button class="btn btn-info ask_a_question" @click="">Задать вопрос</button>-->
 
 <div class="go_home_static_class" v-bind:class="{ description: go_home, hidden_go_home: hidden_go_home}">

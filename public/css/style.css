@@ -90,6 +90,7 @@
 			    z-index: 100;
 			}
 			header h1 {
+				position: absolute;
 				color: #17a2b8;
 				margin-top: 20px;
 				font-size: 112px;
@@ -97,14 +98,15 @@
 			}
 			header b {
 			    position: absolute;
-			    color: #FAEBD7;
+			    color: #17a2b8;
 			    top: 122px;
 			    margin-left: 150px;
 			    font-size: 42px;
 			}
 			.header_img {
-				clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
-				margin-top: -40%;
+			/*	clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
+				margin-top: -40%;   */
+				position: relative;
 				z-index: -9999;
 				width: 100%;
 			}
@@ -165,7 +167,7 @@
 
 			}
 			#app {
-				margin-top: -30%;
+				margin-top: 0%;
 			}
 			tr:hover {
 				background: #ADD8E6;
@@ -188,13 +190,14 @@
 				border-radius: 8px;
 			}
 			.description {
+				font-size: 18px;
 				position: fixed;
 				background: #FFEBCD;
 				min-height: 400px;
-				width: 60%;
+				width: 80%;
 				min-height: 41%;
 				border-radius: 8px;
-				left: 20%;
+				left: 10%;
 				top: 15%;
 				padding: 20px;
 				border-top: 48px solid #117a8b;
@@ -280,8 +283,8 @@
 				border-radius: 4px;
 				position: relative;
 				top: 10px;
-				left: 25%;
-				width: 900px;
+				left: 20%;
+				width: 60%;
 				font-size: 36px;
 			} 
 			.ym_pay_button button {
@@ -295,9 +298,8 @@
 				position: relative;
 				font-size: 36px;
 				top:15px;
-				left: 25%;
-				height: 72px;
-				width: 900px;
+				left: 20%;
+				width: 60%;
 			}
 			.hidden_go_home {
 				display: none;
@@ -308,15 +310,13 @@
 			.go_home_static_class input {
 				margin-left: 25px;
 				width: 450px;
-				height: 55px;
-				font-size: 24px;
+				height: 40px;
 				text-align: center;
 			}
 			.go_home_static_class textarea {
 				margin-left: 25px;
 				width: 450px;
-				height: 155px;
-				font-size: 24px;
+				height: 100px;
 			}
 			.task {
 				position: absolute;
@@ -326,33 +326,15 @@
 			}
 
 
-			@media screen and (min-width: 1025px) and (max-width: 1264px) {
-				.header_img {
-				    margin-top: -45%;
-				}
+		@media screen and (min-width: 913px) and (max-width: 1196px) {
 				.description {
-					left: 1%;
-					top: 20%;
-					width: 98%;
-				}
-				header h1 {
-					font-size: 62px;
-					margin-top: 0px;
-				}
-				header b {
-					font-size: 44px;
-					margin-top: -114px;
-					margin-left: 40%;
-				}
-			}
-		@media screen and (min-width: 787px) and (max-width: 1024px) {
-				.description {
-					position: absolute;
+					position: fixed;
 					width: 98%;
 					min-height: 600px;
+					left: 1%;
 				}
 				.header_img {
-				    margin-top: -46%;
+				 
 				}
 				header h1 {
 					font-size: 62px;
@@ -365,8 +347,8 @@
 				}
 				.ym_pay_button {
 					font-size: 26px;
-					left: 0%;
-					width: 100%;
+				    left: 10%;
+				    width: 80%;
 				}
 				.ym_pay_button button {
 					font-size: 26px;
@@ -375,9 +357,9 @@
 					position: relative;
 					font-size: 26px;
 					top:15px;
-					left: 0%;
-					height: 72px;
-					width: 100%;
+				    left: 10%;
+				    height: 72px;
+				    width: 80%;
 				}
 				.admin_button {
 				    position: absolute;
@@ -385,39 +367,8 @@
 				    width: 36%;
 				    height: 57px;
 				}
-				.buttons {
-				    position: absolute;
-				    display: flex;
-				    font-size: 24px;
-				    left: 60%;
-				    top: 92%;
-				}
-				.buttons button {
-					height: 100px;
-				    width: 100px;
-				    border-radius: 100px;
-				    border-bottom: 2px solid #117a8b;
-				}
-				.close {
-				    font-size: 40px;
-				    position: absolute;
-				    background: white;
-				    border: 2px dashed black;
-				    border-radius: 100px;
-				    padding: 30px;
-				    top: -75px;
-				    left: 88%;
-				    color: #fff;
-				    background-color: #dc3545;
-				    border-color: #dc3545;
-				    width: 100px;
-				    height: 100px;
-				    text-align: center;
-				    transition: 0.2s;
-				    opacity: 1;
-				}
 			}
-		@media screen and (max-width: 786px) {
+		@media screen and (max-width: 912px) {
 
 				.banner_site_name {
 					width: 100%;
@@ -456,38 +407,72 @@
 					min-height: 600px;
 				}
 				.header_img {
-				    margin-top: -46%;
+				    margin-top: 0%;
+				    width: 150%;
 
+				}
+				table {
+					width: 150%;
+				}
+				td {
+					font-size: 14px;
+				}
+				td img {
+					height: 55px;
+					width: 55px;
 				}
 				header h1 {
 					font-size: 42px;
 					margin-left: 2%;
+					top: -2%;
 				}
 				header b {
-				    font-size: 30px;
-				    margin-top: -96px;
-				    margin-left: 40%;
+				    font-size: 19px;
+				    top: 7%;
+				    margin-left: 9%;
 				}
+				.description {
+					width: 150%;
+    				left: 0;
+    				font-size: 16px;
+				}
+
+				.description .btn-info {
+    				left: 120px;
+    			}
 				.buttons b {
 					left: 250px;
 				}
+				.buttons p {
+    				font-size: 16px;
+    				margin: 8px;
+    				width: 120px;
+    			}
 				.buttons div {
-					margin-left: -250px;
+					margin-left: -300px;
+					display: flex;
+					margin-top: -60px;
 				}
 				.admin_button {
 				    position: absolute;
-				    right: 200px;
-				    width: 35%;
-				    height: 3%;
-				}		
+				    display: flex;
+				    justify-content: center;
+				    width: 90%;
+				    right: 50px;
+				    font-size: 14px;
+				}	
+				.scroll {
+					left: 37%;
+				    width: 63%;
+				}	
 				.buttons {
 				    position: absolute;
 				    display: flex;
-				    font-size: 24px;
-				    left: 60%;
+				    font-size: 18px;
+				    left: 55%;
 				    top: 92%;
-				    height: 100px;
-				    width: 100px;
+				    height: 70px;
+				    width: 70px;
 				    border-radius: 100px;
 				}
 				.buttons button {
@@ -497,22 +482,36 @@
 				    border-bottom: 2px solid #117a8b;
 				}
 				.close {
-				    font-size: 40px;
+				    font-size: 16px;
 				    position: absolute;
 				    background: white;
 				    border: 2px dashed black;
 				    border-radius: 100px;
 				    padding: 30px;
-				    top: -75px;
-				    left: 88%;
+				    top: -72px;
+				    left: 85%;
 				    color: #fff;
 				    background-color: #dc3545;
 				    border-color: #dc3545;
-				    width: 100px;
-				    height: 100px;
+				    width: 70px;
+				    height: 70px;
 				    text-align: center;
 				    transition: 0.2s;
 				    opacity: 1;
+				}
+				.task {
+					position: relative;
+					font-size: 18px;
+					margin-left: 0;
+				}
+				.go_home_button, .ym_pay_button {
+					font-size: 16px;
+					left: 0;
+					width: 150%;
+					height: 48px;
+				}
+				.ym_pay_button button {
+					font-size: 16px;
 				}
 			}
 
