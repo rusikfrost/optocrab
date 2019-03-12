@@ -72,8 +72,8 @@
 			<label> Введите Вопрос </label><br>
 			<textarea v-model="ask_a_question_post.ask_a_question_text" required></textarea><br>
 			<button type="submit" class="btn btn-info" @click="ask_a_question_send, ask_a_question_checked = true"> Задать вопрос </button>
-		</div>
-			<div class="scroll">
+		</div><br><br>
+			<div class="reviews_window">
 				<h3> Часто задаваемые вопросы:</h3>
 				<b>Насколько долго осуществляется доставка?</b>
 				<p>Доставка осуществляется с г.Белореченска до Вашего населённого пункта. Во временные рамки включены - погрузка и сама доставка. В среднем от 1 до 4 часов, в зависимости от погодных условий и дальности поставки.</p>
@@ -103,7 +103,7 @@
 				{{review.review_date}}
 			</div>
 
-		</div>
+		</div><br><br>
 		<div v-if="reviews_checked"><h3>Спасибо, Ваш отзыв принят</h3></div>
 		<div v-else class="reviews_form">
 			<label>Введите Ваше имя </label><br>
@@ -199,7 +199,7 @@
 	<button class="btn btn-info"> Отправить </button>
 
 	</form>	 <br>
-	<p style="font-size: 24px;"><b>Внимание: </b> при наличии товара на складе, вносится предоплата в количестве 10% от суммарной стоимости заказа. В данный момент эта сумма составляет: <b>{{sum_full_price * 0.1}} рублей.</b><br> Счет предоплаты придет на Ваш email.</p>
+	<p><b>Внимание: </b> при наличии товара на складе, вносится предоплата в количестве 10% от суммарной стоимости заказа. В данный момент эта сумма составляет: <b>{{sum_full_price * 0.1}} рублей.</b><br> Счет предоплаты придет на Ваш email.</p>
 	<b class="task">{{formcomment}}</b> 
 
 </div>

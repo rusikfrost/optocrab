@@ -151,6 +151,7 @@
 			.reviews_window {
 				position: absolute;
 			    overflow-y: scroll;
+			    top: 12%;
 			    left: 35%;
 			    height: 83%;
 			    width: 65%;
@@ -312,17 +313,20 @@
 				width: 450px;
 				height: 40px;
 				text-align: center;
+				background: #FAEBD7;
 			}
 			.go_home_static_class textarea {
 				margin-left: 25px;
 				width: 450px;
 				height: 100px;
+				background: #FAEBD7;
 			}
 			.task {
-				position: absolute;
-			    margin-left: 48%;
-			    margin-top: -51%;
+			    position: absolute;
+			    margin-top: -600px;
 			    padding: 8px;
+			    width: 50%;
+			    left: 50%;
 			}
 
 
@@ -366,6 +370,13 @@
 				    right: 220px;
 				    width: 36%;
 				    height: 57px;
+				}
+				.task {
+					margin-top: -700px;
+				    padding: 8px;
+				    /* height: 40%; */
+				    width: 30%;
+				    left: 60%;
 				}
 			}
 		@media screen and (max-width: 912px) {
@@ -499,10 +510,41 @@
 				    transition: 0.2s;
 				    opacity: 1;
 				}
+				.go_home_static_class input {
+				margin-left: 15px;
+				width: 90%;
+				height: 35px;
+				}
+				label {
+					font-size: 16px;
+				}
+				.reviews_window {
+					position: relative;
+					width: 96%;
+					left: 2%;
+					height: 400px;
+				}
+				.reviews_form input {
+					position: relative;
+					width: 96%;
+					left: 2%;
+				}
+				.reviews_form textarea {
+					position: relative;
+					width: 96%;
+					left: 2%;
+					height: 90px;
+				}
+				.go_home_static_class textarea {
+					margin-left: 15px;
+					width: 90%;
+					height: 90px;
+				}
 				.task {
 					position: relative;
-					font-size: 18px;
-					margin-left: 0;
+					font-size: 16px;
+					left: 0;
+					margin-top: -650px;
 				}
 				.go_home_button, .ym_pay_button {
 					font-size: 16px;
